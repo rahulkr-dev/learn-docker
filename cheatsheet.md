@@ -31,8 +31,16 @@ docker rm $(docker ps -aq)
 # Remove all containers forcefully
 docker rm --force $(docker ps -aq)
 
+# Remove images
+docker images -q <image_name>
+
 # Execute a command to print environment variables within a running container
 docker exec <container_id> printenv
 
 # Inspect and display the environment variables of a container in JSON format
 docker inspect --format '{{json .Config.Env}}' <container_id>
+
+# creating images if docker file in different folder not in root
+docker build -t <image_name> -f <pathOfDockerfile> <build_context>
+docker build -t postgres -f docker/dev/Dockerfile .
+
